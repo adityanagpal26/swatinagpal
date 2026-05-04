@@ -43,8 +43,8 @@ function renderNode(node: LexicalNode, key: number): React.ReactNode {
     case 'paragraph':
       return <p key={key}>{renderChildren(node.children)}</p>
     case 'heading': {
-      const Tag = (node.tag as keyof JSX.IntrinsicElements) || 'h2'
-      return <Tag key={key}>{renderChildren(node.children)}</Tag>
+      const Tag = (node.tag || 'h2') as keyof React.JSX.IntrinsicElements
+      return React.createElement(Tag, { key }, renderChildren(node.children))
     }
     case 'list': {
       const Tag = node.listType === 'number' ? 'ol' : 'ul'
