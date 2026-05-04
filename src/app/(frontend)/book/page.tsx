@@ -2,14 +2,30 @@ import type { Metadata } from 'next'
 import { Phone, MessageCircle } from 'lucide-react'
 import { BookingForm } from './BookingForm'
 import { SITE, telLink, whatsappLink } from '@/lib/utils'
+import { pageMetadata } from '@/lib/seo'
+import { JsonLd, breadcrumbSchema } from '@/components/StructuredData'
 
-export const metadata: Metadata = {
-  title: 'Book Appointment',
-  description: `Book a physiotherapy appointment with ${SITE.doctor.name}.`,
-}
+export const metadata: Metadata = pageMetadata({
+  title: 'Book Appointment Online',
+  description: `Book a physiotherapy appointment online with ${SITE.doctor.name} (MPT, DN Specialist). Choose your preferred date and time — confirmation by phone or WhatsApp.`,
+  path: '/book',
+  keywords: [
+    'book physiotherapist appointment',
+    'online appointment booking',
+    'physiotherapy consultation',
+    'Dr. Swati Nagpal appointment',
+  ],
+})
 
 export default function BookPage() {
   return (
+    <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', href: '/' },
+          { name: 'Book Appointment', href: '/book' },
+        ])}
+      />
     <section className="container py-12 md:py-16">
       <div className="mx-auto max-w-3xl text-center">
         <span className="inline-flex items-center gap-2 rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-700">
@@ -64,5 +80,6 @@ export default function BookPage() {
         </aside>
       </div>
     </section>
+    </>
   )
 }

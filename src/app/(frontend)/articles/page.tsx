@@ -4,12 +4,15 @@ import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { getPayloadInstance } from '@/lib/payload'
 import { formatDate } from '@/lib/utils'
+import { pageMetadata } from '@/lib/seo'
+import { JsonLd, breadcrumbSchema } from '@/components/StructuredData'
 
-export const metadata: Metadata = {
-  title: 'Articles',
+export const metadata: Metadata = pageMetadata({
+  title: 'Articles & Physiotherapy Insights',
   description:
-    'Physiotherapy tips, exercises, and educational articles by Dr. Swati Nagpal.',
-}
+    'Practical physiotherapy tips, exercises and educational articles by Dr. Swati Nagpal — covering pain management, injury recovery, posture and rehabilitation.',
+  path: '/articles',
+})
 
 export const dynamic = 'force-dynamic'
 
@@ -29,6 +32,13 @@ export default async function ArticlesIndexPage() {
   }
 
   return (
+    <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', href: '/' },
+          { name: 'Articles', href: '/articles' },
+        ])}
+      />
     <section className="container py-12 md:py-16">
       <div className="mx-auto max-w-3xl text-center">
         <span className="inline-flex items-center gap-2 rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-700">
@@ -93,5 +103,6 @@ export default async function ArticlesIndexPage() {
         </div>
       )}
     </section>
+    </>
   )
 }

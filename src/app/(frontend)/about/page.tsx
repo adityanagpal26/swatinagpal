@@ -2,12 +2,15 @@ import Image from 'next/image'
 import type { Metadata } from 'next'
 import { GraduationCap, Award, Briefcase, ShieldCheck } from 'lucide-react'
 import { SITE } from '@/lib/utils'
+import { pageMetadata } from '@/lib/seo'
+import { JsonLd, breadcrumbSchema } from '@/components/StructuredData'
 
-export const metadata: Metadata = {
-  title: 'About',
+export const metadata: Metadata = pageMetadata({
+  title: `About ${SITE.doctor.name} — MPT, DN Specialist`,
   description:
-    'Learn about Dr. Swati Nagpal — MPT Musculoskeletal, Dry Needling Specialist with 8 years of clinical experience.',
-}
+    'Learn about Dr. Swati Nagpal — MPT Musculoskeletal, Dry Needling Specialist with 8 years of clinical experience treating neck, back, shoulder, knee and joint conditions.',
+  path: '/about',
+})
 
 const qualifications = [
   {
@@ -35,6 +38,12 @@ const qualifications = [
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', href: '/' },
+          { name: 'About', href: '/about' },
+        ])}
+      />
       <section className="bg-gradient-to-b from-brand-50 to-white py-16 md:py-20">
         <div className="container grid gap-10 md:grid-cols-2 md:items-center">
           <div>

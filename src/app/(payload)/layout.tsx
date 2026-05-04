@@ -10,6 +10,7 @@ import { importMap } from './admin/importMap.js'
 export const metadata: Metadata = {
   title: 'Admin — Dr. Swati Nagpal Physio',
   description: 'Content management for Dr. Swati Nagpal Physio',
+  robots: { index: false, follow: false, nocache: true },
 }
 
 const serverFunction: ServerFunctionClient = async function (args) {

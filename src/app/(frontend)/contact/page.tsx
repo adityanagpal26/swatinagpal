@@ -3,14 +3,24 @@ import Link from 'next/link'
 import { Phone, MessageCircle, Mail, CalendarCheck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { SITE, telLink, whatsappLink } from '@/lib/utils'
+import { pageMetadata } from '@/lib/seo'
+import { JsonLd, breadcrumbSchema } from '@/components/StructuredData'
 
-export const metadata: Metadata = {
-  title: 'Contact',
-  description: `Get in touch with ${SITE.doctor.name} — call, WhatsApp or email.`,
-}
+export const metadata: Metadata = pageMetadata({
+  title: 'Contact Dr. Swati Nagpal — Call, WhatsApp & Email',
+  description: `Get in touch with ${SITE.doctor.name}. Call ${SITE.doctor.phone}, message on WhatsApp, or email ${SITE.doctor.email}.`,
+  path: '/contact',
+})
 
 export default function ContactPage() {
   return (
+    <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', href: '/' },
+          { name: 'Contact', href: '/contact' },
+        ])}
+      />
     <section className="container py-12 md:py-16">
       <div className="mx-auto max-w-3xl text-center">
         <span className="inline-flex items-center gap-2 rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-700">
@@ -111,5 +121,6 @@ export default function ContactPage() {
         </div>
       </div>
     </section>
+    </>
   )
 }

@@ -5,12 +5,29 @@ import {
   SYMPTOM_OPTIONS,
 } from '@/collections/Treatments'
 import { ServicesClient } from './ServicesClient'
+import { pageMetadata } from '@/lib/seo'
+import { JsonLd, breadcrumbSchema } from '@/components/StructuredData'
 
-export const metadata: Metadata = {
-  title: 'Services & Conditions',
+export const metadata: Metadata = pageMetadata({
+  title: 'Services & Conditions Treated',
   description:
-    'Find personalised physiotherapy treatments based on your symptoms and conditions.',
-}
+    'Physiotherapy treatments for neck pain, back pain, shoulder pain, knee pain, ankle pain, leg pain, arthritis, tendonitis and sprain/strain. Personalised plans by Dr. Swati Nagpal.',
+  path: '/services',
+  keywords: [
+    'physiotherapy services',
+    'neck pain treatment',
+    'back pain treatment',
+    'shoulder pain treatment',
+    'knee pain treatment',
+    'ankle pain treatment',
+    'leg pain treatment',
+    'arthritis treatment',
+    'tendonitis treatment',
+    'sprain strain treatment',
+    'manual therapy',
+    'dry needling',
+  ],
+})
 
 export const dynamic = 'force-dynamic'
 
@@ -33,6 +50,13 @@ export default async function ServicesPage() {
   }))
 
   return (
+    <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', href: '/' },
+          { name: 'Services', href: '/services' },
+        ])}
+      />
     <section className="container py-12 md:py-16">
       <div className="mx-auto max-w-3xl text-center">
         <span className="inline-flex items-center gap-2 rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-700">
@@ -54,5 +78,6 @@ export default async function ServicesPage() {
         />
       </div>
     </section>
+    </>
   )
 }
